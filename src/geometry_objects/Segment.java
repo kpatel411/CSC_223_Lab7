@@ -161,6 +161,7 @@ public class Segment extends GeometricObject
 	public boolean coincideWithoutOverlap(Segment that)
 	{
         // TODO
+		// account for cases like |-----| - - - |======| & |--|--|--|overlapping & |----|----|
 	}
 	
 	/**
