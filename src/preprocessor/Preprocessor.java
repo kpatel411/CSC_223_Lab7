@@ -1,6 +1,7 @@
 package preprocessor;
 
 import java.util.HashMap;
+
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -86,5 +87,15 @@ public class Preprocessor
 		//
 		_allMinimalSegments.forEach((segment) -> _segmentDatabase.put(segment, segment));
 		_nonMinimalSegments.forEach((segment) -> _segmentDatabase.put(segment, segment));
+	}
+	
+	public Set<Segment> computeImplicitBaseSegments(Set<Point> ipSet){
+		
+	}
+	public Set<Segment> identifyAllMinimalSegments(Set<Point> ipSet, Set<Segment> segSet, Set<Segment> impSe){
+		
+	}
+	public Set<Segment> constructAllNonMinimalSegments(Set<Segment> minSegs){
+		
 	}
 }

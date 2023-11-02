@@ -183,7 +183,7 @@ public class Segment extends GeometricObject
 	public SortedSet<Point> collectOrderedPointsOnSegment(Set<Point> points)
 	{
 		SortedSet<Point> pointsOn = new TreeSet<Point>();
-
+ 
         // TODO
 
 		return pointsOn;
