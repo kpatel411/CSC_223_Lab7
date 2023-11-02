@@ -93,6 +93,7 @@ public class Preprocessor
 		
 	}
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> ipSet, Set<Segment> segSet, Set<Segment> impSe){
+		//a minimal segment does not have an intersecting segment 
 		
 	}
 	public Set<Segment> constructAllNonMinimalSegments(Set<Segment> minSegs){
