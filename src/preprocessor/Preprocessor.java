@@ -90,7 +90,10 @@ public class Preprocessor
 	}
 	
 	public Set<Segment> computeImplicitBaseSegments(Set<Point> ipSet){
-		
+		Set<Segment> segSet=new LinkedHashSet<Segment>();
+		for (Point p: ipSet) {
+			
+		}
 	}
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> ipSet, Set<Segment> segSet, Set<Segment> impSe){
 		//a minimal segment does not have an intersecting segment 

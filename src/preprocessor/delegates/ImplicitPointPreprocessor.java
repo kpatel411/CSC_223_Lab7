@@ -1,6 +1,7 @@
 package preprocessor.delegates;
 
 import java.util.LinkedHashSet;
+
 import java.util.List;
 import java.util.Set;
 
@@ -22,6 +23,21 @@ public class ImplicitPointPreprocessor
 	public static Set<Point> compute(PointDatabase givenPoints, List<Segment> givenSegments)
 	{
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+        for (Segment s1: givenSegments) {
+        	for (Segment s2: givenSegments) {
+        		if(!s1.equals(s2)) {
+        			Point p = SegmentIntersectionDelegate.findIntersection(s1, s2);
+        			if (p==null) return null;
+        			if (givenPoints.getPoint(p)==null) {
+        				implicitPoints.add(p);
+        				givenPoints.put(Point.ANONYMOUS, p.getX(), p.getY());
+        			}
+=======
+>>>>>>> Stashed changes
 		//loop twice to find any two segments
         for (Segment segment1: givenSegments) {
         	for (Segment segment2: givenSegments) {
@@ -31,6 +47,10 @@ public class ImplicitPointPreprocessor
         			if (p == null) return null;
         			// add the point of intersection since it does not exist in the PointDatabase
         			if (givenPoints.getPoint(p) == null) implicitPoints.add(p);
+<<<<<<< Updated upstream
+=======
+>>>>>>> ceb95d7e8b4858a09a6474ae2470fb5861920674
+>>>>>>> Stashed changes
         		}
         	}
         }
