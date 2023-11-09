@@ -14,6 +14,7 @@ import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import preprocessor.delegates.ImplicitPointPreprocessor;
 import geometry_objects.Segment;
+import utilities.math.*;
 
 public class Preprocessor
 {
@@ -113,6 +114,45 @@ public class Preprocessor
 		return null;
 	}
 	public Set<Segment> constructAllNonMinimalSegments(Set<Segment> minSegs){
+		Set<Segment> segSet= new LinkedHashSet<>();
+		return constructAllNonMinimalSegments(minSegs, minSegs, segSet);
+	}
+	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> minList, Set<Segment> workList, Set<Segment> additionalSegs){
+		if (workList.isEmpty()) {
+			minList.addAll(additionalSegs);
+			return minList;
+		}
+		Set<Segment> newWorkList= new LinkedHashSet<>();
+		for (Segment s: minList) {
+			for (Segment s2: workList) {
+				Segment newSeg=combine(s, s2);
+				if (newSeg!=null) {
+					newWorkList.add(newSeg);
+					additionalSegs.add(newSeg);
+				}
+			}
+		}
+		return constructAllNonMinimalSegments(minList, newWorkList, additionalSegs);
 		
+		
+	}
+
+	private Segment combine(Segment seg, Segment minimal){
+		if (MathUtilities.doubleEquals(seg.slope(), minimal.slope())) {
+			return null;
+		}
+		if(seg.getPoint1().equals(minimal.getPoint1())) {
+			return new Segment(seg.getPoint2(), minimal.getPoint2());
+		}
+		else if (seg.getPoint1().equals(minimal.getPoint2())){
+			return new Segment(seg.getPoint2(), minimal.getPoint1());
+		}
+		else if (seg.getPoint2().equals(minimal.getPoint1())){
+			return new Segment(seg.getPoint1(), minimal.getPoint2());
+		}
+		else if (seg.getPoint2().equals(minimal.getPoint2())) {
+			return new Segment(seg.getPoint1(), minimal.getPoint1());
+		}
+		return null;		
 	}
 }
