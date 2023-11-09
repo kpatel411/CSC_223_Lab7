@@ -32,6 +32,7 @@ public class ImplicitPointPreprocessor
         			Point p = SegmentIntersectionDelegate.findIntersection(s1, s2);
         			if (p == null) return null;
         			// add the point of intersection since it does not exist in the PointDatabase
+        			// makes sure to not analyze repeats 
         			if (givenPoints.getPoint(p) == null) {
         				implicitPoints.add(p);
         				givenPoints.put(Point.ANONYMOUS, p.getX(), p.getY());
@@ -44,5 +45,3 @@ public class ImplicitPointPreprocessor
 	}
         		
 }
-
-//make sure to not analyze repeats 
