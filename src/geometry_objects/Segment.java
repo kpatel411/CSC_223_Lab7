@@ -165,8 +165,11 @@ public class Segment extends GeometricObject
 	public boolean coincideWithoutOverlap(Segment that)
 	{
         
-		// account for cases like |-----| - - - |======| & |--|--|--|overlapping & |----|----|
-	}
+		if (this.equals(that)) return false;
+		if (this.pointLiesBetweenEndpoints(that.getPoint1()) || this.pointLiesBetweenEndpoints(that.getPoint2())) return false;
+		//check to see in testing if line below is needed, try commenting it out
+		if (that.pointLiesBetweenEndpoints(this.getPoint1()) || that.pointLiesBetweenEndpoints(this.getPoint2())) return false;
+		return true;	}
 	
 	/**
 	 *   Example:
@@ -188,6 +191,10 @@ public class Segment extends GeometricObject
 	public SortedSet<Point> collectOrderedPointsOnSegment(Set<Point> points)
 	{
 		SortedSet<Point> pointsOn = new TreeSet<Point>();
+		
+		for(Point p: points) {
+			if (this.pointLiesOn(p)) pointsOn.add(p);
+		}
  
         // TODO
 		//if the points in the sorted set are not lexicographic, then return null?
