@@ -169,7 +169,9 @@ public class Segment extends GeometricObject
 		if (this.pointLiesBetweenEndpoints(that.getPoint1()) || this.pointLiesBetweenEndpoints(that.getPoint2())) return false;
 		//check to see in testing if line below is needed, try commenting it out
 		if (that.pointLiesBetweenEndpoints(this.getPoint1()) || that.pointLiesBetweenEndpoints(this.getPoint2())) return false;
-		return true;	}
+		return true;	
+		
+	}
 	
 	/**
 	 *   Example:
