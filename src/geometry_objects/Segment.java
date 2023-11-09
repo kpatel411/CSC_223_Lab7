@@ -190,6 +190,8 @@ public class Segment extends GeometricObject
 	 *
 	 * @return the sorted subset of Points that lie on this segment (ordered lexicographically)
 	 */
+	//if the points in the sorted set are not lexicographic, then return null?
+	//if points in the sorted set are lexicographic, then return pointsOn?
 	public SortedSet<Point> collectOrderedPointsOnSegment(Set<Point> points)
 	{
 		SortedSet<Point> pointsOn = new TreeSet<Point>();
@@ -197,10 +199,6 @@ public class Segment extends GeometricObject
 		for(Point p: points) {
 			if (this.pointLiesOn(p)) pointsOn.add(p);
 		}
- 
-        // TODO
-		//if the points in the sorted set are not lexicographic, then return null?
-		//if points in the sorted set are lexicographic, then return pointsOn?
 
 		return pointsOn;
 	}
