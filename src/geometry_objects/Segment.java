@@ -204,4 +204,5 @@ public class Segment extends GeometricObject
 
 		return pointsOn;
 	}
+	
 }
