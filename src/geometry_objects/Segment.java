@@ -190,6 +190,8 @@ public class Segment extends GeometricObject
 		SortedSet<Point> pointsOn = new TreeSet<Point>();
  
         // TODO
+		//if the points in the sorted set are not lexicographic, then return null?x
+		//if points in the sorted set are lexicographic, then return that subset
 
 		return pointsOn;
 	}
