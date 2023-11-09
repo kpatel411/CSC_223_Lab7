@@ -28,27 +28,28 @@ public class ImplicitPointPreprocessor
         	for (Segment s2: givenSegments) {
         		if(!s1.equals(s2)) {
         			Point p = SegmentIntersectionDelegate.findIntersection(s1, s2);
-        			if (p==null) return null;
-        			if (givenPoints.getPoint(p)==null) {
+        			if (p == null) return null;
+        			if (givenPoints.getPoint(p) == null) {
         				implicitPoints.add(p);
         				givenPoints.put(Point.ANONYMOUS, p.getX(), p.getY());
         			}
-
-		//loop twice to find any two segments
-        for (Segment segment1: givenSegments) {
-        	for (Segment segment2: givenSegments) {
-        		//if the segments are not equal then find an intersection
-        		if(!segment1.equals(segment2)) {
-        			Point p = SegmentIntersectionDelegate.findIntersection(segment1, segment2);
-        			if (p == null) return null;
-        			// add the point of intersection since it does not exist in the PointDatabase
         			if (givenPoints.getPoint(p) == null) implicitPoints.add(p);
-       
+
+////		//loop twice to find any two segments
+////        for (Segment segment1: givenSegments) {
+////        	for (Segment segment2: givenSegments) {
+////        		//if the segments are not equal then find an intersection
+////        		if(!segment1.equals(segment2)) {
+//        			//Point p = SegmentIntersectionDelegate.findIntersection(segment1, segment2);
+//        			if (p == null) return null;
+//        			// add the point of intersection since it does not exist in the PointDatabase
+//       
         		}
         	}
         }
         return implicitPoints;
 	}
+        		
 }
 
 //make sure to not analyze repeats 
