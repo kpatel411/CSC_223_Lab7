@@ -2,6 +2,7 @@ package preprocessor;
 
 import java.util.HashMap;
 
+
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -91,9 +92,15 @@ public class Preprocessor
 	
 	public Set<Segment> computeImplicitBaseSegments(Set<Point> ipSet){
 		Set<Segment> segSet=new LinkedHashSet<Segment>();
-		for (Point p: ipSet) {
-			
+		for(Point p: ipSet) {
+			for (Segment s: _givenSegments) {
+				if (s.pointLiesBetweenEndpoints(p)) {
+					segSet.add(new Segment(s.getPoint1(), p));
+					segSet.add(new Segment(s.getPoint2(), p));
+				}
+			}
 		}
+		return segSet;
 	}
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> ipSet, Set<Segment> segSet, Set<Segment> impSe){
 		//a minimal segment does not have an intersecting segment 
