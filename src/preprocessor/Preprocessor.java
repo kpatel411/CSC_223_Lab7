@@ -104,8 +104,10 @@ public class Preprocessor
 	}
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoint, Set<Segment> givenSegments, Set<Segment> implicitSegment){
 		//a minimal segment does not have an intersecting segment 
-		if (givenSegments.findIntersection()) return ;
-		if (!(givenSegments.findIntersection())) return implicitSegment;  //need to find out return obj
+		if (givenSegments.contains(implicitSegment)) return null;
+		if (!(givenSegments.contains(implicitSegment))) return implicitSegment; 
+		
+		return null; 
 	}
 	public Set<Segment> constructAllNonMinimalSegments(Set<Segment> minSegs){
 		
