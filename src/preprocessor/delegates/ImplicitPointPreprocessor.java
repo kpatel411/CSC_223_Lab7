@@ -33,7 +33,7 @@ public class ImplicitPointPreprocessor
         				implicitPoints.add(p);
         				givenPoints.put(Point.ANONYMOUS, p.getX(), p.getY());
         			}
-        			if (givenPoints.getPoint(p) == null) implicitPoints.add(p);
+//        			if (givenPoints.getPoint(p) == null) implicitPoints.add(p);
 
 ////		//loop twice to find any two segments
 ////        for (Segment segment1: givenSegments) {
