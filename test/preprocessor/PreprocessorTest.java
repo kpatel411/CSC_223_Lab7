@@ -34,10 +34,10 @@ class PreprocessorTest
 		Preprocessor pp = new Preprocessor(points, segments);
 
 		// 5 new implied points inside the pentagon
-		Set<Point> iPoints = ImplicitPointPreprocessor.compute(points, new ArrayList<Segment>(segments));
-		assertEquals(5, iPoints.size());
+		//Set<Point> pp._implicitPoints = ImplicitPointPreprocessor.compute(points, new ArrayList<Segment>(segments));
+		assertEquals(5, pp._implicitPoints.size());
 
-		System.out.println(iPoints);
+		System.out.println(pp._implicitPoints);
 
 		//
 		//
@@ -57,16 +57,16 @@ class PreprocessorTest
 		Point d_star = new Point(90.0 / 59, 210.0 / 59);
 		Point e_star = new Point(194.0 / 55, 182.0 / 55);
 
-		assertTrue(iPoints.contains(a_star));
-		assertTrue(iPoints.contains(b_star));
-		assertTrue(iPoints.contains(c_star));
-		assertTrue(iPoints.contains(d_star));
-		assertTrue(iPoints.contains(e_star));
+		assertTrue(pp._implicitPoints.contains(a_star));
+		assertTrue(pp._implicitPoints.contains(b_star));
+		assertTrue(pp._implicitPoints.contains(c_star));
+		assertTrue(pp._implicitPoints.contains(d_star));
+		assertTrue(pp._implicitPoints.contains(e_star));
 
 		//
 		// There are 15 implied segments inside the pentagon; see figure above
 		//
-		Set<Segment> iSegments = pp.computeImplicitBaseSegments(iPoints);
+		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
 		assertEquals(15, iSegments.size());
 
 		List<Segment> expectedISegments = new ArrayList<Segment>();
@@ -107,7 +107,7 @@ class PreprocessorTest
 		expectedMinimalSegments.add(new Segment(points.getPoint("D"), points.getPoint("E")));
 		expectedMinimalSegments.add(new Segment(points.getPoint("E"), points.getPoint("A")));
 		
-		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(iPoints, segments, iSegments);
+		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
 		assertEquals(expectedMinimalSegments.size(), minimalSegments.size());
 
 		for (Segment minimalSeg : minimalSegments)
