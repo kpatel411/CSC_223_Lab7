@@ -83,7 +83,13 @@ class SegmentTest {
 		setC.add(A);
 		setC.add(C);
 		setC.add(Q);
-		assertEquals(AC.collectOrderedPointsOnSegment(setA),setC);
-		
+		HashSet<Point> setD = new HashSet<Point>(); 
+		setD.add(A);
+		setD.add(B);
+		setD.add(C);
+		setD.add(Q);
+		assertNotEquals(AC.collectOrderedPointsOnSegment(setA),setC);
+		assertEquals(AC.collectOrderedPointsOnSegment(setB), setB);
+		assertEquals(AC.collectOrderedPointsOnSegment(setD), setB);
 	}
 }

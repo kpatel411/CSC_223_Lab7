@@ -198,8 +198,7 @@ public class Segment extends GeometricObject
 		
 		for(Point p: points) {
 			if (this.pointLiesOn(p)) pointsOn.add(p);
-		}
-
+		}	
 		return pointsOn;
 	}
 	
