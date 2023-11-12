@@ -20,9 +20,9 @@ public class ImplicitPointPreprocessor
 	{
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
         //iterates through the segments
-        for (int i=0; i<givenSegments.size()-1;i++) {
+        for (int i = 0; i < givenSegments.size() - 1; i++) {
         	//iterates through the segments that come after the segment at I, ensuring no repetition of segments or pairs of segments
-        	for (int j=i+1; j<givenSegments.size();j++) {
+        	for (int j = i + 1; j < givenSegments.size(); j++) {
         		//checks if implicit point
         		Point p=SegmentIntersectionDelegate.findIntersection(givenSegments.get(i), givenSegments.get(j));
         		
@@ -32,6 +32,15 @@ public class ImplicitPointPreprocessor
         		if(p!=null) {
         			if(givenPoints.getPoint(p)==null) {
         				System.out.print("P is not null :)");
+        		Point p = SegmentIntersectionDelegate.findIntersection(givenSegments.get(i), givenSegments.get(j));
+        		System.out.println("Segment at index i: " + givenSegments.get(i));
+        		System.out.println("Segment at index j: " + givenSegments.get(j));
+        		//to prove that it’s null
+        		if (p == null)System.out.println("why");
+        		//if p isn’t null it checks that p doesn’t exist in pointDatabase
+        		if(p != null) {
+        			if(givenPoints.getPoint(p) == null) {
+        				System.out.print("1");
         				//prevents the same implicit point from being found twice
         				givenPoints.put(null, p.getX(), p.getY());
         				implicitPoints.add(p);
