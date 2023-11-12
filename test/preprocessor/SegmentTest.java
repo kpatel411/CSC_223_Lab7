@@ -91,5 +91,21 @@ class SegmentTest {
 		assertNotEquals(AC.collectOrderedPointsOnSegment(setA),setC);
 		assertEquals(AC.collectOrderedPointsOnSegment(setB), setB);
 		assertEquals(AC.collectOrderedPointsOnSegment(setD), setB);
+		
+		//    /P
+		//   /
+		//  /Q
+		//  \
+		//   \
+		//    \R
+		Segment PQ = new Segment(P, Q);
+		HashSet<Point> setX = new HashSet<Point>(); 
+		setX.add(P);
+		setX.add(Q);
+		HashSet<Point> setY = new HashSet<Point>(); 
+		setX.add(Q);
+		setY.add(R);
+		assertNotEquals(PQ.collectOrderedPointsOnSegment(setX),setY);
+		
 	}
 }
