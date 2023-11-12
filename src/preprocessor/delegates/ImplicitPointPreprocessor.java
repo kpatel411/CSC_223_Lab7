@@ -25,14 +25,13 @@ public class ImplicitPointPreprocessor
         	for (int j=i+1; j<givenSegments.size();j++) {
         		//checks if implicit point
         		Point p=SegmentIntersectionDelegate.findIntersection(givenSegments.get(i), givenSegments.get(j));
-        		System.out.println("Segment at index i: " + givenSegments.get(i));
-        		System.out.println("Segment at index j: " + givenSegments.get(j));
-        		//to prove that it’s null
-        		if (p==null)System.out.println("why");
+        		
+        		if (givenSegments.get(i).toString().equals("BE"))System.out.println(givenSegments.get(j)+"\nwhy");
+
         		//if p isn’t null it checks that p doesn’t exist in pointDatabase
         		if(p!=null) {
         			if(givenPoints.getPoint(p)==null) {
-        				System.out.print("1");
+        				System.out.print("P is not null :)");
         				//prevents the same implicit point from being found twice
         				givenPoints.put(null, p.getX(), p.getY());
         				implicitPoints.add(p);

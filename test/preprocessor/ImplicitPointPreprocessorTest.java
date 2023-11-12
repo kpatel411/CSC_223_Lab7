@@ -23,18 +23,18 @@ class ImplicitPointPreprocessorTest {
 		Point D=new Point("D", -2, 0);
 		Point E=new Point("E", 2, 0);
 				
-//		Segment AB=new Segment(A,B);
-//		Segment AC=new Segment(A,C);
-//		Segment BC=new Segment(B,C);
-//		Segment BD=new Segment(B,D);
+		Segment AB=new Segment(A,B);
+		Segment AC=new Segment(A,C);
+		Segment BC=new Segment(B,C);
+		Segment BD=new Segment(B,D);
 		
 		//creates segments BE and CD
 		Segment BE=new Segment(B,E);
 		Segment CD=new Segment(C,D);
 				
 				
-//		Segment CE=new Segment(C,E);
-//		Segment DE=new Segment(D,E);
+		Segment CE=new Segment(C,E);
+		Segment DE=new Segment(D,E);
 				
 		
 		//creates and then adds points to database
@@ -46,14 +46,14 @@ class ImplicitPointPreprocessorTest {
 		pd.put("E", 2, 0);
 		//adds segments to segment list
 		Set<Segment> segSet=new LinkedHashSet<Segment>();
-//		segList.add(AB);
-//		segList.add(AC);
-//		segList.add(BC);
-//		segList.add(BD);
+		segSet.add(AB);
+		segSet.add(AC);
+		segSet.add(BC);
+		segSet.add(BD);
 		segSet.add(BE);
 		segSet.add(CD);
-//		segList.add(CE);
-//		segList.add(DE);
+		segSet.add(CE);
+		segSet.add(DE);
 		Set<Point> implicitPoints = ImplicitPointPreprocessor.compute(pd, segSet.stream().toList());
 		//prints implicitPoints
 		System.out.println(implicitPoints.toString());
