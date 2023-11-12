@@ -114,4 +114,7 @@ public class Point implements Comparable<Point>
         	   MathUtilities.doubleEquals(this._y, that._y);
         
 	}
+	public String toString() {
+		return this.getName();
+	}
 }

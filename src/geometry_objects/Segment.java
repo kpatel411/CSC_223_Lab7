@@ -201,5 +201,9 @@ public class Segment extends GeometricObject
 		}	
 		return pointsOn;
 	}
+
+	public String toString() {
+		return this.getPoint1().toString() + this.getPoint2().toString();
+	}
 	
 }
