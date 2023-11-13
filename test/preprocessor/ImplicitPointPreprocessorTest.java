@@ -2,7 +2,9 @@ package preprocessor;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -22,20 +24,6 @@ class ImplicitPointPreprocessorTest {
 		Point C=new Point("C", 1, 2);
 		Point D=new Point("D", -2, 0);
 		Point E=new Point("E", 2, 0);
-				
-		Segment AB=new Segment(A,B);
-		Segment AC=new Segment(A,C);
-		Segment BC=new Segment(B,C);
-		Segment BD=new Segment(B,D);
-		
-		//creates segments BE and CD
-		Segment BE=new Segment(B,E);
-		Segment CD=new Segment(C,D);
-				
-				
-		Segment CE=new Segment(C,E);
-		Segment DE=new Segment(D,E);
-				
 		
 		//creates and then adds points to database
 		PointDatabase pd= new PointDatabase();
@@ -45,18 +33,19 @@ class ImplicitPointPreprocessorTest {
 		pd.put("D", -2, 0);
 		pd.put("E", 2, 0);
 		//adds segments to segment list
-		Set<Segment> segSet=new LinkedHashSet<Segment>();
-		segSet.add(AB);
-		segSet.add(AC);
-		segSet.add(BC);
-		segSet.add(BD);
-		segSet.add(BE);
-		segSet.add(CD);
-		segSet.add(CE);
-		segSet.add(DE);
-		Set<Point> implicitPoints = ImplicitPointPreprocessor.compute(pd, segSet.stream().toList());
+		ArrayList<Segment> segmentList=new ArrayList<Segment>();
+		segmentList.add(new Segment(A,B));
+		segmentList.add(new Segment(A,C));
+		segmentList.add(new Segment(B,C));
+		segmentList.add(new Segment(B,D));
+		segmentList.add(new Segment(B,E));
+		segmentList.add(new Segment(C,D));
+		segmentList.add(new Segment(C,E));
+		segmentList.add(new Segment(D,E));
+		Set<Point> implicitPoints = ImplicitPointPreprocessor.compute(pd, segmentList);
 		//prints implicitPoints
-		System.out.println(implicitPoints.toString());
+		//System.out.println(implicitPoints.toString());
+		assertEquals(implicitPoints.size(), 1);
 	}
 
 }

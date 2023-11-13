@@ -105,9 +105,10 @@ public class Preprocessor
 	}
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoint, Set<Segment> givenSegments, Set<Segment> implicitSegment){
 		//a minimal segment does not have an intersecting segment 
-		if (givenSegments.containsAll(implicitSegment)) return null;
-		if (!givenSegments.containsAll(implicitSegment)) {
-			givenSegments.addAll(implicitSegment);
+		Set<Segment> implicitSeg = new HashSet<Segment>();
+		if (givenSegments.containsAll(implicitSeg)) return null;
+		if (!givenSegments.containsAll(implicitSeg)) {
+			givenSegments.addAll(implicitSeg);
 			return givenSegments;
 		}
 		
@@ -118,12 +119,15 @@ public class Preprocessor
 		return constructAllNonMinimalSegments(minSegs, minSegs, segSet);
 	}
 	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> minList, Set<Segment> workList, Set<Segment> additionalSegs){
-		if (workList.isEmpty()) {
-			minList.addAll(additionalSegs);
-			return minList;
+		Set<Segment> minimumList = new HashSet<Segment>();
+		if (workList == null) {
+			if (minimumList != null) {
+				minimumList.addAll(additionalSegs);
+			return minimumList;
+			}
 		}
 		Set<Segment> newWorkList= new LinkedHashSet<>();
-		for (Segment s: minList) {
+		for (Segment s: minimumList) {
 			for (Segment s2: workList) {
 				Segment newSeg=combine(s, s2);
 				if (newSeg!=null) {
@@ -132,7 +136,7 @@ public class Preprocessor
 				}
 			}
 		}
-		return constructAllNonMinimalSegments(minList, newWorkList, additionalSegs);
+		return newWorkList;
 		
 		
 	}
