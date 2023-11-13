@@ -19,15 +19,15 @@ public class ImplicitPointPreprocessor
 	public static Set<Point> compute(PointDatabase givenPoints, List<Segment> givenSegments)
 	{
 		Set<Point> implicitPoints = new LinkedHashSet<Point>();
-		System.out.println(givenPoints.size());
-		System.out.println(givenSegments.size());
 		for (int i = 0; i < givenSegments.size() - 1; i++) {
 			//iterates through the segments that come after the segment at I, ensuring no repetition of segments or pairs of segments
 			for (int j = i + 1; j < givenSegments.size(); j++) {
 				//checks if implicit point
-				if (givenSegments.get(i).toString().equals("AC")) {
-					System.out.println(givenSegments.get(j).toString());
-				}
+//				if (givenSegments.get(i).toString().equals("AC")) {
+//					System.out.println(givenSegments.get(j).toString());
+//				}
+				Segment s1=givenSegments.get(i);
+				Segment s2=givenSegments.get(j);
 				Point p = SegmentIntersectionDelegate.findIntersection(givenSegments.get(i), givenSegments.get(j));
 				//if p isn’t null it checks that p doesn’t exist in pointDatabase
 				if(p != null && givenPoints.getPoint(p) == null) {

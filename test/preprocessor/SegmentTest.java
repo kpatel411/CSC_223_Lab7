@@ -187,6 +187,9 @@ class SegmentTest {
 		assertTrue(A2D2.HasSubSegment(E2B2));
 		assertTrue(A2D2.HasSubSegment(E2D2));
 		assertTrue(E2D2.HasSubSegment(E2B2));
+		//self test
+		assertTrue(A2D2.HasSubSegment(A2D2));
+		assertTrue(E2B2.HasSubSegment(E2B2));
 		
 		assertFalse(E2C2.HasSubSegment(B2D2));
 		assertFalse(C2D2.HasSubSegment(E2B2));
