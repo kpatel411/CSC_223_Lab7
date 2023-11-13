@@ -162,4 +162,34 @@ class SegmentTest {
 		setY.add(R);
 		assertNotEquals(PQ.collectOrderedPointsOnSegment(setX),setY);				
 	}
+	@Test
+	void hasSubSegment() {
+		Point A2=new Point(-2, 0);
+		Point B2=new Point(0, 3);
+		Point C2=new Point(2, 6);
+		Point D2=new Point(4, 9);
+		Point E2=new Point(-1, 1.5);
+		Point F2=new Point(-1,0);
+		Point G2=new Point(1, 3);
+		
+		Segment A2D2=new Segment(A2, D2);
+		Segment A2C2=new Segment(A2, C2);
+		Segment E2B2=new Segment(E2, B2);
+		Segment E2C2=new Segment(E2, C2);
+		Segment B2D2=new Segment(B2, D2);
+		Segment C2D2=new Segment(C2, D2);
+		Segment E2D2=new Segment(E2, C2);
+		Segment F2G2=new Segment(F2, G2);
+		
+		//A2--E2---B2---C2---D2
+		//F2----G2
+		assertTrue(A2D2.HasSubSegment(A2C2));
+		assertTrue(A2D2.HasSubSegment(E2B2));
+		assertTrue(A2D2.HasSubSegment(E2D2));
+		assertTrue(E2D2.HasSubSegment(E2B2));
+		
+		assertFalse(E2C2.HasSubSegment(B2D2));
+		assertFalse(C2D2.HasSubSegment(E2B2));
+		assertFalse(A2D2.HasSubSegment(F2G2));
+	}
 }

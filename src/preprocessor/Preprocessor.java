@@ -92,76 +92,121 @@ public class Preprocessor
 	}
 	
 	public Set<Segment> computeImplicitBaseSegments(Set<Point> ipSet){
-		Set<Segment> segSet=new LinkedHashSet<Segment>();
-		for(Point p: ipSet) {
-			for (Segment s: _givenSegments) {
+		Set<Segment> impSeg = new LinkedHashSet<Segment>();
+		for(Point p : ipSet) {
+			for (Segment s : _givenSegments) {
+				
 				if (s.pointLiesBetweenEndpoints(p)) {
-					segSet.add(new Segment(s.getPoint1(), p));
-					segSet.add(new Segment(s.getPoint2(), p));
+					impSeg.add(new Segment(s.getPoint1(), p));
+					impSeg.add(new Segment(s.getPoint2(), p));
 				}
 			}
 		}
-		return segSet;
+		return impSeg;
 	}
-	public Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoint, Set<Segment> givenSegments, Set<Segment> implicitSegment){
-		//a minimal segment does not have an intersecting segment 
-		Set<Segment> implicitSeg = new HashSet<Segment>();
-		//combination of implicit and explicit >> if segment has no points on it then add it
-		for (Segment g : givenSegments) {
-			if (implicitSeg != null) {
-				givenSegments.addAll(implicitSeg);
+	public Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoints, Set<Segment> givenSegments, Set<Segment> implicitSegments){
+		Set<Segment> allMinimalSegs = new HashSet<Segment>();
+		for (Segment s:givenSegments) {
+			for (Point impPt: implicitPoints) {
+				if (!s.pointLiesBetweenEndpoints(impPt)) allMinimalSegs.add(s);
 			}
 		}
-		//account for implicit segments that do not exist like BX, CX, etc.
-		if (givenSegments.containsAll(implicitSeg)) return null;
-		if (!givenSegments.containsAll(implicitSeg)) {
-			givenSegments.addAll(implicitSeg);
-			return givenSegments;
-		}
-		
-		return null;
+		allMinimalSegs.addAll(implicitSegments);
+		return allMinimalSegs;
+//		
+//		//a minimal segment does not have an intersecting segment 
+//		Set<Segment> implicitSeg = new HashSet<Segment>();
+//		//combination of implicit and explicit >> if segment has no points on it then add it
+//		for (Segment g : givenSegments) {
+//			if (implicitSeg != null) {
+//				givenSegments.addAll(implicitSeg);
+//			}
+//		}
+//		//account for implicit segments that do not exist like BX, CX, etc.
+//		if (givenSegments.containsAll(implicitSeg)) return null;
+//		if (!givenSegments.containsAll(implicitSeg)) {
+//			givenSegments.addAll(implicitSeg);
+//			return givenSegments;
+//		}
+//		
+//		return null;
 	}
 	public Set<Segment> constructAllNonMinimalSegments(Set<Segment> minSegs){
 		Set<Segment> segSet= new LinkedHashSet<>();
 		return constructAllNonMinimalSegments(minSegs, minSegs, segSet);
 	}
 	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> minList, Set<Segment> workList, Set<Segment> additionalSegs){
-		Set<Segment> minimumList = new HashSet<Segment>();
-		if (workList == null) {
-			if (minimumList != null) {
-				minimumList.addAll(additionalSegs);
-			return minimumList;
-			}
+		if(workList.isEmpty()) {
+			System.out.println(additionalSegs.size());
+			return additionalSegs;
 		}
-		Set<Segment> newWorkList= new LinkedHashSet<>();
-		for (Segment s: minimumList) {
-			for (Segment s2: workList) {
-				Segment newSeg=combine(s, s2);
-				if (newSeg!=null) {
+//		System.out.println(workList.size());
+		Set<Segment> newWorkList = new LinkedHashSet<>();
+		for (Segment s : minList) {
+			for (Segment s2 : workList) {
+				Segment newSeg = combine(s, s2);
+
+				if (newSeg != null && !minList.contains(newSeg)) {
 					newWorkList.add(newSeg);
 					additionalSegs.add(newSeg);
 				}
 			}
 		}
-		return newWorkList;
+		for(Segment s : newWorkList) {
+//			System.out.println("(" + s.getPoint1().getX() + "," + s.getPoint1().getY() +")" + "," + "(" + s.getPoint2().getX() + "," + s.getPoint2().getY() +")");
+		}
+		System.out.println();
+		return constructAllNonMinimalSegments(minList, newWorkList, additionalSegs);
+		
+//		Set<Segment> minimumList = new HashSet<Segment>();
+//		if (workList == null) {
+//			//why not just return additionalSegs? What does the minimuList do?
+//			if (minimumList != null) {
+//				minimumList.addAll(additionalSegs);
+//			System.out.println(minimumList.size());
+//			return minimumList;
+//			}
+//		}
+//		Set<Segment> newWorkList= new LinkedHashSet<>();
+//		for (Segment s: minimumList) {
+//			for (Segment s2: workList) {
+//				Segment newSeg=combine(s, s2);
+//				if (newSeg!=null) {
+//					System.out.println("1");
+//					newWorkList.add(newSeg);
+//					additionalSegs.add(newSeg);
+//				}
+//			}
+//		}
+//		System.out.print(newWorkList.size());
+//		return newWorkList;
 		
 		
 	}
 
 	private Segment combine(Segment seg, Segment minimal){
-		if (MathUtilities.doubleEquals(seg.slope(), minimal.slope())) {
+		if (seg.equals(minimal)) {
+//			System.out.println(0);
+			return null;
+		}
+		if (!MathUtilities.doubleEquals(seg.slope(), minimal.slope())) {
+//			System.out.println(1);
 			return null;
 		}
 		if(seg.getPoint1().equals(minimal.getPoint1())) {
+//			System.out.println(2);
 			return new Segment(seg.getPoint2(), minimal.getPoint2());
 		}
 		else if (seg.getPoint1().equals(minimal.getPoint2())){
+//			System.out.println(3);
 			return new Segment(seg.getPoint2(), minimal.getPoint1());
 		}
 		else if (seg.getPoint2().equals(minimal.getPoint1())){
+//			System.out.println(4);
 			return new Segment(seg.getPoint1(), minimal.getPoint2());
 		}
 		else if (seg.getPoint2().equals(minimal.getPoint2())) {
+//			System.out.println(5);
 			return new Segment(seg.getPoint1(), minimal.getPoint1());
 		}
 		return null;		

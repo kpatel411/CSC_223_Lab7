@@ -159,4 +159,16 @@ class PreprocessorTest
 			assertTrue(expectedNonMinimalSegments.contains(computedNonMinimalSegment));
 		}
 	}
+//	@Test
+//	void basicTest() {
+//		FigureNode fig = InputFacade.extractFigure("Basic.json");
+//
+//		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
+//
+//		PointDatabase points = pair.getKey();
+//
+//		Set<Segment> segments = pair.getValue();
+//
+//		Preprocessor pp = new Preprocessor(points, segments);
+//	}
 }

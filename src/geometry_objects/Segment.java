@@ -72,8 +72,8 @@ public class Segment extends GeometricObject
 	public boolean HasSubSegment(Segment candidate)
 	{
 		if (candidate.getPoint1().equals(candidate.getPoint2())) return false;
-		boolean pt1Contained = SegmentDelegate.pointLiesOnSegment(this, candidate.getPoint1());
-		boolean pt2Contained = SegmentDelegate.pointLiesOnSegment(this, candidate.getPoint2());
+		boolean pt1Contained = this.pointLiesOnSegment(candidate.getPoint1());
+		boolean pt2Contained = this.pointLiesOnSegment(candidate.getPoint2());
         if (pt1Contained && pt2Contained) return true;
         return false;
 	}
@@ -162,6 +162,7 @@ public class Segment extends GeometricObject
 	 * 
 	 * Note: the segment MAY share an endpoint
 	 */
+
 	public boolean coincideWithoutOverlap(Segment that)
 	{
 		if (this.equals(that)) return false;
@@ -177,10 +178,6 @@ public class Segment extends GeometricObject
 		return false;	
 		
 	}
-
-
-
-
 	
 	/**
 	 *   Example:
