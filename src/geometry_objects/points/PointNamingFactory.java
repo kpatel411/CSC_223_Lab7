@@ -66,27 +66,30 @@ public class PointNamingFactory
 					* a completely new point that has been added to the database
 	 */
 	public Point put(Point pt) {	
-		//if the given point has a name, 
-		if (!pt.isUnnamed()) {
-			//check if that name already exists in the database. 
-			for (Point p: _database.keySet()) {
-				//if so, use getCurrentName()
-				if (p.getName().equals(pt.getName())) {
-					Point newPoint = new Point(getCurrentName(), pt.getX(), pt.getY());
-					_database.put(newPoint, newPoint);
-					return pt;
-				}
+		Point inDBTestPt = this.get(pt);
+		//if in the database, return it, we don't need to do anything
+		if (inDBTestPt != null) {
+			
+			if (inDBTestPt.getName().startsWith(_PREFIX)) {
+				_database.remove(inDBTestPt);
+				Point newPoint = new Point(pt.getName(), pt.getX(), pt.getY());
+				_database.put(newPoint, newPoint);
+				return newPoint;
 			}
-			//else, use the given name
-			_database.put(pt, pt);
-			return pt;
+			
+			return inDBTestPt;
 		}
+
 		//if the given point is unnamed, use getCurrentName()
-		else {
+		if (pt.isUnnamed()) {
 			Point newPoint = new Point(getCurrentName(), pt.getX(), pt.getY());
 			_database.put(newPoint, newPoint);
-			return pt;
+			return newPoint;
 		}
+		
+		//else, use the given name
+		_database.put(pt, pt);
+		return pt;
 	}
 
 	/**

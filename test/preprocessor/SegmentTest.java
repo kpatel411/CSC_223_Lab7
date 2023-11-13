@@ -30,10 +30,10 @@ class SegmentTest {
 	Point Q = new Point(8, 9);
 	Point R = new Point(9, 8);
 	
-//	Point H=new Point(“H”, -1, -1);
-//	Point I=new Point(“I”, 5, 1);
-//	Point J=new Point(“J”, -1, Math.sqrt(2));
-//	Point K=new Point(“K”, -1, 3);
+	Point H=new Point(-1, -1);
+	Point I=new Point(5, 1);
+	Point J=new Point(-1, Math.sqrt(2));
+	Point K=new Point(-1, 3);
 //	Point L=new Point(“L”, 2, -2);
 //	Point M=new Point(“M”, 4, 2);
 //	Point N=new Point(“N”, 10, -1);
@@ -104,14 +104,14 @@ class SegmentTest {
 		assertTrue(FG2.coincideWithoutOverlap(AB2));
 		
 		
-//		Segment HI=new Segment(H, I);
+		Segment HI=new Segment(H, I);
 //		Segment IN=new Segment(I, N);
 //		Segment OAA=new Segment(O, AA);
-//		Segment JK=new Segment(J, K);
+		Segment JK=new Segment(J, K);
 //		Segment LM=new Segment(L, M);
 //		Segment CCBB=new Segment(CC, BB);
 //		
-//		assertTrue(HI.coincideWithoutOverlap(JK));
+		assertFalse(HI.coincideWithoutOverlap(JK));
 //		assertTrue(HI.coincideWithoutOverlap(IN));
 //		assertTrue(HI.coincideWithoutOverlap(CCBB));
 //		

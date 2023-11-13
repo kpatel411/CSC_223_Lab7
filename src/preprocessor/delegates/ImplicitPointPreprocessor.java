@@ -26,14 +26,14 @@ public class ImplicitPointPreprocessor
 //				if (givenSegments.get(i).toString().equals("AC")) {
 //					System.out.println(givenSegments.get(j).toString());
 //				}
-				Segment s1=givenSegments.get(i);
-				Segment s2=givenSegments.get(j);
+//				Segment s1=givenSegments.get(i);
+//				Segment s2=givenSegments.get(j);
 				Point p = SegmentIntersectionDelegate.findIntersection(givenSegments.get(i), givenSegments.get(j));
 				//if p isn’t null it checks that p doesn’t exist in pointDatabase
 				if(p != null && givenPoints.getPoint(p) == null) {
-					if (givenSegments.get(i).toString().equals("AC")) System.out.println("1");
-					implicitPoints.add(p);
+//					if (givenSegments.get(i).toString().equals("AC")) System.out.println("1");
 					givenPoints.put(Point.ANONYMOUS, p.getX(), p.getY());
+					implicitPoints.add(givenPoints.getPoint(p.getX(), p.getY()));
 				}
 			}
 //			System.out.println(givenSegments.get(i).toString());
