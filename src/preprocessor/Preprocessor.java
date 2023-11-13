@@ -106,6 +106,13 @@ public class Preprocessor
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoint, Set<Segment> givenSegments, Set<Segment> implicitSegment){
 		//a minimal segment does not have an intersecting segment 
 		Set<Segment> implicitSeg = new HashSet<Segment>();
+		//combination of implicit and explicit >> if segment has no points on it then add it
+		for (Segment g : givenSegments) {
+			if (implicitSeg != null) {
+				givenSegments.addAll(implicitSeg);
+			}
+		}
+		//account for implicit segments that do not exist like BX, CX, etc.
 		if (givenSegments.containsAll(implicitSeg)) return null;
 		if (!givenSegments.containsAll(implicitSeg)) {
 			givenSegments.addAll(implicitSeg);
