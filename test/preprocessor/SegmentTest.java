@@ -64,12 +64,12 @@ class SegmentTest {
 		Segment XW = new Segment(X, W);
 		assertFalse(ZY.coincideWithoutOverlap(XW));
 		
-		//    /
+		//    /P
 		//   /
-		//  /
+		//  /Q
 		//  \
 		//   \
-		//    \
+		//    \R
 		Segment PQ = new Segment(P, Q);
 		Segment QR = new Segment(Q, R);
 		assertFalse(PQ.coincideWithoutOverlap(QR));

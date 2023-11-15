@@ -173,23 +173,7 @@ public class Segment extends GeometricObject
 		
 		return !(this.pointLiesBetweenEndpoints(that.getPoint1()) ||
 			this.pointLiesBetweenEndpoints(that.getPoint2()));
-	}
-
-
-		
-		
-		
-//		if (this.equals(that)) return false;
-//		double yIntThis=this.getPoint1().getY()-(this.slope()*this.getPoint1().getX());
-//		double yIntThat=that.getPoint1().getY()-(that.slope()*this.getPoint1().getX());
-//		if (this.isCollinearWith(that) || MathUtilities.doubleEquals(yIntThis, yIntThat)) {
-//			if (this.pointLiesBetweenEndpoints(that.getPoint1()) || this.pointLiesBetweenEndpoints(that.getPoint2())) return false;
-//		//check to see in testing if line below is needed, try commenting it out
-//			if (that.pointLiesBetweenEndpoints(this.getPoint1()) || that.pointLiesBetweenEndpoints(this.getPoint2())) return false;
-//			return true;
-//		}
-//		
-//		return false;	
+	}	
 		
 	
 	/**
