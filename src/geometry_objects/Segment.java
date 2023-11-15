@@ -72,8 +72,10 @@ public class Segment extends GeometricObject
 	public boolean HasSubSegment(Segment candidate)
 	{
 		if (this.equals(candidate)) return true;
-		if (this.pointLiesOnSegment(candidate.getPoint1())) return false;
-		return this.pointLiesOnSegment(candidate.getPoint2());
+		if (!this.pointLiesOnSegment(candidate.getPoint1())) return false;
+		if (this.pointLiesOnSegment(candidate.getPoint2())) return true;
+		if (!candidate.pointLiesOnSegment(this.getPoint1())) return false;
+		return candidate.pointLiesOnSegment(this.getPoint2());
 
 	}
 
@@ -165,8 +167,8 @@ public class Segment extends GeometricObject
 	public boolean coincideWithoutOverlap(Segment that)
 	{
 		if (!this.isCollinearWith(that)) return false;
-		return this.pointLiesBetweenEndpoints(that.getPoint1()) ||
-			this.pointLiesBetweenEndpoints(that.getPoint2());
+		return !(this.pointLiesBetweenEndpoints(that.getPoint1()) ||
+			this.pointLiesBetweenEndpoints(that.getPoint2()));
 		
 
 		

@@ -37,7 +37,6 @@ class PreprocessorTest
 		//Set<Point> pp._implicitPoints = ImplicitPointPreprocessor.compute(points, new ArrayList<Segment>(segments));
 		assertEquals(5, pp._implicitPoints.size());
 
-		System.out.println(pp._implicitPoints);
 
 		//
 		//
@@ -159,9 +158,38 @@ class PreprocessorTest
 			assertTrue(expectedNonMinimalSegments.contains(computedNonMinimalSegment));
 		}
 	}
+	@Test
+	void basicTest() {
+		FigureNode fig = InputFacade.extractFigure("Basic.json");
+
+		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
+
+		PointDatabase points = pair.getKey();
+
+		Set<Segment> segments = pair.getValue();
+
+		Preprocessor pp = new Preprocessor(points, segments);
+		
+		assertEquals(1, pp._implicitPoints.size());
+		
+		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
+		assertEquals(4, iSegments.size());
+		
+		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
+		assertEquals(10, minimalSegments.size());
+		
+		Set<Segment> computedNonMinimalSegments = 
+		pp.constructAllNonMinimalSegments(minimalSegments);
+		
+		assertEquals(4, computedNonMinimalSegments.size());
+		
+		
+		assertEquals (14, pp._segmentDatabase.size() );
+		
+	}
 //	@Test
-//	void basicTest() {
-//		FigureNode fig = InputFacade.extractFigure("Basic.json");
+//	void RectangleTest() {
+//		FigureNode fig = InputFacade.extractFigure("Rectangle.json");
 //
 //		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
 //
@@ -170,5 +198,24 @@ class PreprocessorTest
 //		Set<Segment> segments = pair.getValue();
 //
 //		Preprocessor pp = new Preprocessor(points, segments);
+//		Set<Point> impSet = pp._implicitPoints;
+//		for (Point p: impSet) {
+//			System.out.println(p.toString());
+//		}
+//		
+//		assertEquals(3, pp._implicitPoints.size());
+//		
+//		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
+//		assertEquals(9, iSegments.size());
+//		
+//		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
+//		assertEquals(17, minimalSegments.size());
+//		
+//		Set<Segment> computedNonMinimalSegments = 
+//		pp.constructAllNonMinimalSegments(pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments));
+//				
+//		assertEquals(10, computedNonMinimalSegments.size());
+//				
+//		assertEquals (14, pp._segmentDatabase.size() );
 //	}
 }

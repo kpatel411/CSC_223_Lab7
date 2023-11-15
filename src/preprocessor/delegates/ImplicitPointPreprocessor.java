@@ -38,9 +38,6 @@ public class ImplicitPointPreprocessor
 			}
 //			System.out.println(givenSegments.get(i).toString());
 		}
-		for(Point p : implicitPoints) {
-			System.out.println("(" + p.getX() + "," + p.getY() + ")");
-		}
 		return implicitPoints;
 	}
 
