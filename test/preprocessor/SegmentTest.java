@@ -96,7 +96,7 @@ class SegmentTest {
 		assertFalse(AB2.coincideWithoutOverlap(EC2));
 		
 		//tests same slope different y-int
-		assertFalse(AB2.coincideWithoutOverlap(FG2)); //BUG HERE
+		assertTrue(AB2.coincideWithoutOverlap(FG2));
 		
 		
 		Segment HI=new Segment(H, I);
