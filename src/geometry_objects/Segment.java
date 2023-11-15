@@ -167,8 +167,13 @@ public class Segment extends GeometricObject
 	public boolean coincideWithoutOverlap(Segment that)
 	{
 		if (!this.isCollinearWith(that)) return false;
+<<<<<<< Updated upstream
 		return !(this.pointLiesBetweenEndpoints(that.getPoint1()) ||
 			this.pointLiesBetweenEndpoints(that.getPoint2()));
+=======
+		return (this.pointLiesBetweenEndpoints(that.getPoint1()) ||
+			   this.pointLiesBetweenEndpoints(that.getPoint2()));
+>>>>>>> Stashed changes
 		
 
 		
@@ -219,6 +224,6 @@ public class Segment extends GeometricObject
 
 //	public String toString() {
 //		return this.getPoint1().toString() + this.getPoint2().toString();
-//	}  USE TO STRING THAT WAS ALREADY MADE IN POINT CLASS
+//	}  USE TO_STRING THAT WAS ALREADY MADE IN POINT CLASS
 	
 }

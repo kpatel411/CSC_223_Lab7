@@ -38,6 +38,12 @@ public class ImplicitPointPreprocessor
 			}
 //			System.out.println(givenSegments.get(i).toString());
 		}
+<<<<<<< Updated upstream
+=======
+////		for(Point p : implicitPoints) {
+////			System.out.println("(" + p.getX() + "," + p.getY() + ")");
+//		}
+>>>>>>> Stashed changes
 		return implicitPoints;
 	}
 

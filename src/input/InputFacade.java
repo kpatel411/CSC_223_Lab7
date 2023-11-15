@@ -60,8 +60,10 @@ public class InputFacade
 	{
 		PointNodeDatabase pndb = fig.getPointsDatabase();//convert from pointNodeDB to pointdatabase
 		SegmentNodeDatabase sndb = fig.getSegments(); //get all segments w/ helper methods
-
-		return new AbstractMap.SimpleEntry<PointDatabase, Set<Segment>>(convertToPoints(pndb), convertToSegments(sndb, convertToPoints(pndb)));
+		
+		PointDatabase newPDB = convertToPoints (pndb);		
+		Set<Segment> newSDB = convertToSegments (sndb, newPDB);
+		return new AbstractMap.SimpleEntry<PointDatabase, Set<Segment>>(newPDB, newSDB);
 	}
 
 	private static PointDatabase convertToPoints(PointNodeDatabase pndb) {
@@ -82,8 +84,8 @@ public class InputFacade
 		
 		//for each segment in the SegmentNodeDatabase, create Point objects with the same X and Y values 
 		for (SegmentNode segNode: sndb.asSegmentList()) {
-			Point point1 = new Point(segNode.getPoint1().getX(), segNode.getPoint1().getY());
-			Point point2 = new Point(segNode.getPoint2().getX(), segNode.getPoint2().getY());
+			Point point1 = pdb.getPoint(new Point(segNode.getPoint1().getX(), segNode.getPoint1().getY()));
+			Point point2 = pdb.getPoint(new Point(segNode.getPoint2().getX(), segNode.getPoint2().getY()));
 			//if the PointDatabase contains these values, add the segment
 			if (pdb.getPoint(point1) != null && pdb.getPoint(point2) != null) {
 				segments.add(new Segment(point1, point2));
