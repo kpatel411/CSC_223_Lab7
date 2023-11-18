@@ -14,7 +14,7 @@ public class ImplicitPointPreprocessor
 	 * points and name them.
 	 *
 	 * Algorithm:
-	 *    TODO
+	 *    see below
 	 */
 	public static Set<Point> compute(PointDatabase givenPoints, List<Segment> givenSegments)
 	{
@@ -23,25 +23,16 @@ public class ImplicitPointPreprocessor
 			//iterates through the segments that come after the segment at I, ensuring no repetition of segments or pairs of segments
 			for (int j = i + 1; j < givenSegments.size(); j++) {
 				//checks if implicit point
-//				if (givenSegments.get(i).toString().equals("AC")) {
-//					System.out.println(givenSegments.get(j).toString());
-//				}
-//				Segment s1=givenSegments.get(i);
-//				Segment s2=givenSegments.get(j);
 				Point p = SegmentIntersectionDelegate.findIntersection(givenSegments.get(i), givenSegments.get(j));
 				//if p isn’t null it checks that p doesn’t exist in pointDatabase
 				if(p != null && givenPoints.getPoint(p) == null) {
-//					if (givenSegments.get(i).toString().equals("AC")) System.out.println("1");
 					givenPoints.put(Point.ANONYMOUS, p.getX(), p.getY());
 					implicitPoints.add(givenPoints.getPoint(p.getX(), p.getY()));
 				}
 			}
-//			System.out.println(givenSegments.get(i).toString());
 		}
 
-////		for(Point p : implicitPoints) {
-////			System.out.println("(" + p.getX() + "," + p.getY() + ")");
-//		}
+
 		return implicitPoints;
 	}
 
