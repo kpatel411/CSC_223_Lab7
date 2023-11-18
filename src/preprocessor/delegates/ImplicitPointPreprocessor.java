@@ -24,7 +24,7 @@ public class ImplicitPointPreprocessor
 			for (int j = i + 1; j < givenSegments.size(); j++) {
 				//checks if implicit point
 				Point p = SegmentIntersectionDelegate.findIntersection(givenSegments.get(i), givenSegments.get(j));
-				//if p isn’t null it checks that p doesn’t exist in pointDatabase
+				//if p isn’t null it checks that p doesn’t exist in pointDatabase otherwise add it
 				if(p != null && givenPoints.getPoint(p) == null) {
 					givenPoints.put(Point.ANONYMOUS, p.getX(), p.getY());
 					implicitPoints.add(givenPoints.getPoint(p.getX(), p.getY()));

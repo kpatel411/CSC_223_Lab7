@@ -19,7 +19,7 @@ import preprocessor.delegates.ImplicitPointPreprocessor;
 class ImplicitPointPreprocessorTest {
 
 	@Test
-	void basicTest() {
+	void basicTest() { //TODO rename this cause I don't know what this is testing exactly and neither will Alvin
 		//creates points
 		Point A=new Point("A", 0, 4);
 		Point B=new Point("B", -1, 2);
