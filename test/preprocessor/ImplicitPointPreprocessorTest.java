@@ -59,13 +59,10 @@ class ImplicitPointPreprocessorTest {
 		pp.constructAllNonMinimalSegments(minimalSegments);
 		
 		assertEquals(4, computedNonMinimalSegments.size());
-		
-		for (Entry<Segment, Segment> s: pp._segmentDatabase.entrySet()) {
-			System.out.print(s.getKey().getPoint1().getName() + s.getKey().getPoint2().getName() + ", ");
-		}
 	}
+	
 	@Test
-	void AlvinTest() {
+	void AlvinTest() { //TODO rename this cause I don't know what this is testing exactly and neither will Alvin
 		Point A=new Point("A", 0, 0);
 		Point B=new Point("B", 4, 0);
 		Point C=new Point("C", 6, 3);

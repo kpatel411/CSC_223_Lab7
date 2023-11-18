@@ -94,6 +94,18 @@ public class Preprocessor
 		_nonMinimalSegments.forEach((segment) -> _segmentDatabase.put(segment, segment));
 	}
 	
+	/**
+	 * If two segments cross at an unnamed point, the result is an implicit point.
+	 * 
+	 * This new implicit point may be found on any of the existing segments (possibly
+	 * with others implicit points on the same segment).
+	 * This results in new, minimal sub-segments.
+	 *
+	 * For example,   A----*-------*----*---B will result in 4 new base segments.
+	 *
+	 * @param impPoints -- implicit points computed from segment intersections
+	 * @return a set of implicitly defined segments
+	 */
 	public Set<Segment> computeImplicitBaseSegments(Set<Point> impPtSet){
 		Set<Segment> subSegSet = new LinkedHashSet<Segment>();
 		Set<Segment> finalSubSegSet = new LinkedHashSet<Segment>();
@@ -128,6 +140,14 @@ public class Preprocessor
 		return finalSubSegSet;
 	}
 
+	/**
+	 * From the 'given' segments we remove any non-minimal segment.
+	 * 
+	 * @param impPoints -- the implicit points for the figure
+	 * @param givenSegments -- segments provided by the user
+	 * @param minimalImpSegments -- minimal implicit segments computed from the implicit points
+	 * @return -- a 
+	 */
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoints, Set<Segment> givenSegments, Set<Segment> implicitSegments){
 		Set<Segment> allMinimalSegs = new HashSet<Segment>(givenSegments);
 		Set<Segment> segmentsToRemove=new LinkedHashSet<Segment>();
@@ -188,7 +208,12 @@ public class Preprocessor
 //		return null;
 	}
 		
-		
+	/**
+	 * Given a set of minimal segments, build non-minimal segments by appending
+	 * minimal segments (one at a time).
+	 * 
+	 * (Recursive construction of segments.)
+	 */	
 	public Set<Segment> constructAllNonMinimalSegments(Set<Segment> minSegs){
 		Set<Segment> segSet= new LinkedHashSet<>();
 		return constructAllNonMinimalSegments(minSegs, minSegs, segSet);
@@ -255,6 +280,15 @@ public class Preprocessor
 		
 	}
 
+	//
+	// Our goal is to stitch together segments that are on the same line:
+	//                       A---------B----------C
+	// resulting in the segment AC.
+	//
+	// To do so we ask:
+	//    * Are each segment on the same (infinite) line?
+	//    * If so, do they share an endpoint?
+	// If both criteria are satisfied we have a new segment.
 	private Segment combine(Segment seg, Segment minimal){
 		Point _C=new Point("*_C",  2.04,3.932196162046908);
 		Point _B=new Point("*_B", 2.04,3.99);
