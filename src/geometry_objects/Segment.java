@@ -69,13 +69,11 @@ public class Segment extends GeometricObject
 	 * @param candidate
 	 * @return true if this segment contains candidate as subsegment.
 	 */
-	public boolean HasSubSegment(Segment candidate)
-	{
+	public boolean HasSubSegment(Segment candidate){
+		
 		if (this.equals(candidate)) return true;
 		if (!this.pointLiesOnSegment(candidate.getPoint1())) return false;
-		if (this.pointLiesOnSegment(candidate.getPoint2())) return true;
-		if (!candidate.pointLiesOnSegment(this.getPoint1())) return false;
-		return candidate.pointLiesOnSegment(this.getPoint2());
+		return (this.pointLiesOnSegment(candidate.getPoint2()));
 
 	}
 
@@ -168,11 +166,10 @@ public class Segment extends GeometricObject
 	{
 		if (!this.isCollinearWith(that)) return false;
 		
-		//shares endpoint 
-		if (this.getPoint2().equals(that.getPoint1())) return true; 
-		
 		return !(this.pointLiesBetweenEndpoints(that.getPoint1()) ||
-			this.pointLiesBetweenEndpoints(that.getPoint2()));
+			this.pointLiesBetweenEndpoints(that.getPoint2()) 
+			|| that.pointLiesBetweenEndpoints(this.getPoint1()) 
+			|| that.pointLiesBetweenEndpoints(this.getPoint2()));
 	}	
 		
 	
