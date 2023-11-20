@@ -166,6 +166,7 @@ public class Preprocessor
 		if(workList.isEmpty()) {
 			return additionalSegs;
 		}
+
 		Set<Segment> newWorkList = new LinkedHashSet<>();
 		for (Segment s : minList) {
 			for (Segment s2 : workList) {
