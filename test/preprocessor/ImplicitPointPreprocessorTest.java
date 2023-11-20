@@ -145,13 +145,7 @@ class ImplicitPointPreprocessorTest {
 		
 		Preprocessor pp = new Preprocessor(pd, segmentList);
 		
-		System.out.println(AG.pointLiesBetweenEndpoints(H));
-		// 5 new implied points inside the pentagon
 		assertEquals(3, pp._implicitPoints.size());
-//		for (Point p : pp._implicitPoints) {
-//			System.out.println(450);
-//			System.out.println(p.getX() +"," +p.getY());
-//		}
 		
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
 		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segmentList, iSegments);
@@ -161,11 +155,9 @@ class ImplicitPointPreprocessorTest {
 		Set<Segment> computedNonMinimalSegments = 
 		pp.constructAllNonMinimalSegments(pp.identifyAllMinimalSegments(pp._implicitPoints, segmentList, iSegments));
 						
-		assertEquals(10, computedNonMinimalSegments.size());
-		//
-		// All Segments will consist of the new 15 non-minimal segments.
-		//
-		assertEquals(15, computedNonMinimalSegments.size());
+		assertEquals(13, computedNonMinimalSegments.size());
+
+		assertEquals(30, pp._segmentDatabase.size());
 		
 	}
 
