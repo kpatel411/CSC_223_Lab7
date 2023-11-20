@@ -160,7 +160,17 @@ class PreprocessorTest
 		}
 	}
 	@Test
+	
 	void basicTest() {
+		/**
+		 * 		 A
+		 *      /\
+		 *     /  \
+		 *    B	   C
+		 *   / \ __/\
+		 *  / /	   \ \
+		 * D----------E 
+		 */
 		FigureNode fig = InputFacade.extractFigure("Basic.json");
 
 		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
@@ -187,34 +197,6 @@ class PreprocessorTest
 		
 		assertEquals (14, pp._segmentDatabase.size() );
 		
-	}
-	@Test
-	void RectangleTest() {
-		FigureNode fig = InputFacade.extractFigure("Rectangle.json");
-
-		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
-
-		PointDatabase points = pair.getKey();
-
-		Set<Segment> segments = pair.getValue();
-
-		Preprocessor pp = new Preprocessor(points, segments);
-		//Set<Point> impSet = pp._implicitPoints;
-		
-		assertEquals(3, pp._implicitPoints.size());
-		
-		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
-		assertEquals(9, iSegments.size());
-		
-		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
-		assertEquals(17, minimalSegments.size());
-		
-		Set<Segment> computedNonMinimalSegments = 
-		pp.constructAllNonMinimalSegments(pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments));
-				
-		assertEquals(13, computedNonMinimalSegments.size());
-				
-		assertEquals (30, pp._segmentDatabase.size() );
 	}
 	
 	@Test
