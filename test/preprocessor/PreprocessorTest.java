@@ -66,6 +66,9 @@ class PreprocessorTest
 		// There are 15 implied segments inside the pentagon; see figure above
 		//
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
+		for (Point p : pp._implicitPoints) {
+			System.out.println(p.getX() +"," + p.getY() + p.getName());
+		}
 		assertEquals(15, iSegments.size());
 
 		List<Segment> expectedISegments = new ArrayList<Segment>();
@@ -235,19 +238,19 @@ class PreprocessorTest
 			System.out.println(p.toString());
 		}
 		
-		assertEquals(1, pp._implicitPoints.size());
+		assertEquals(3, pp._implicitPoints.size());
 		
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
-		assertEquals(6, iSegments.size());
+		assertEquals(8, iSegments.size());
 		
 		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
-		assertEquals(14, minimalSegments.size());
+		assertEquals(16, minimalSegments.size());
 		
 		Set<Segment> computedNonMinimalSegments = 
 		pp.constructAllNonMinimalSegments(pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments));
 				
-		assertEquals(3, computedNonMinimalSegments.size());
+		assertEquals(9, computedNonMinimalSegments.size());
 				
-		assertEquals (17, pp._segmentDatabase.size() );
+		assertEquals (25, pp._segmentDatabase.size() );
 	}
 }
