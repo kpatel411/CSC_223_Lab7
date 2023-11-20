@@ -299,8 +299,10 @@ public class Preprocessor
 			//stitch the two together
 			if (seg.sharedVertex(minimal) != null) {
 				//if (MathUtilities.doubleEquals(seg.getPoint1().getY(), seg.getPoint2().getY())){
+				// assuming they are ordered 
+				if (Point.LexicographicOrdering(seg.getPoint1(), seg.getPoint2()) {
 				return new Segment(seg.getPoint1(), seg.getPoint2());
-				//}
+				}
 			}
 		}
 		
