@@ -133,25 +133,38 @@ public class Preprocessor
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoints, Set<Segment> givenSegments, Set<Segment> implicitSegments){
 		Set<Segment> allMinimalSegs = new HashSet<Segment>(givenSegments);
 		Set<Segment> segmentsToRemove=new LinkedHashSet<Segment>();
-		Set<Point> pd=_pointDatabase.getPoints();
+
 		for (Segment s : givenSegments) {
-			for (Point pt: pd) {
+			for (Point pt: _pointDatabase.getPoints()) {
 				//if a non-implicit minimal point is not in given, it finds it
 				if (s.pointLiesBetweenEndpoints(pt)){
-					allMinimalSegs.addAll(computeImplicitBaseSegments(pd));
+					allMinimalSegs.addAll(computeImplicitBaseSegments(_pointDatabase.getPoints()));
 				}
 			}
 				
 		}
 		//removes givenSegments that have implicit points
 		for (Segment s:givenSegments) {
-			for (Point impPt: pd) {
+			for (Point impPt: _pointDatabase.getPoints()) {
 				if (s.pointLiesBetweenEndpoints(impPt)) segmentsToRemove.add(s);
 			}
 		}
 		allMinimalSegs.removeAll(segmentsToRemove);
 		allMinimalSegs.addAll(implicitSegments);
 		return allMinimalSegs;
+
+		
+//		A more efficient version
+//		allMinimalSegs.addAll(implicitSegments);
+//		
+//		for (Segment s:givenSegments) {
+//			for (Point pt: _pointDatabase.getPoints()) {
+//				if (s.pointLiesBetweenEndpoints(pt)) segmentsToRemove.add(s);
+//			}
+//		}
+//		allMinimalSegs.removeAll(segmentsToRemove);
+//		allMinimalSegs.addAll(implicitSegments);
+//		return allMinimalSegs;
 	}
 		
 	/**
