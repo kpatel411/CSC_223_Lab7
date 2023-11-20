@@ -247,7 +247,7 @@ class SegmentTest {
 		//shared endpoints
 		assertFalse(KF2.HasSubSegment(F2G2));
 
-		Segment AB=new Segment(A, B);
+		//Segment AB=new Segment(A, B);
 		Segment AE=new Segment(A, E);
 		Segment CE=new Segment(C, E);
 		Segment CD=new Segment(C, D);
