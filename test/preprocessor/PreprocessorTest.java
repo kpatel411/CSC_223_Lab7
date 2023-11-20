@@ -209,13 +209,13 @@ class PreprocessorTest
 		assertEquals(9, iSegments.size());
 		
 		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
-		assertEquals(17, minimalSegments.size());
+		assertEquals(9, minimalSegments.size());
 		
 		Set<Segment> computedNonMinimalSegments = 
 		pp.constructAllNonMinimalSegments(pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments));
 				
-		assertEquals(13, computedNonMinimalSegments.size());
+		assertEquals(9, computedNonMinimalSegments.size());
 				
-		assertEquals (30, pp._segmentDatabase.size() );
+		assertEquals (18, pp._segmentDatabase.size() );
 	}
 }

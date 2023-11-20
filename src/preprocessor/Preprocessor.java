@@ -131,19 +131,12 @@ public class Preprocessor
 	public Set<Segment> identifyAllMinimalSegments(Set<Point> implicitPoints, Set<Segment> givenSegments, Set<Segment> implicitSegments){
 		Set<Segment> allMinimalSegs = new HashSet<Segment>(givenSegments);
 		Set<Segment> segmentsToRemove=new LinkedHashSet<Segment>();
-		Set<Point> pd=_pointDatabase.getPoints();
-		for (Segment s : givenSegments) {
-			for (Point pt: pd) {
-				if (s.pointLiesBetweenEndpoints(pt)){
-					allMinimalSegs.addAll(computeImplicitBaseSegments(pd));
-				}
-			}
-				
-		}
+		
+		allMinimalSegs.addAll(implicitSegments);
 		
 		for (Segment s:givenSegments) {
-			for (Point impPt: pd) {
-				if (s.pointLiesBetweenEndpoints(impPt)) segmentsToRemove.add(s);
+			for (Point pt: _pointDatabase.getPoints()) {
+				if (s.pointLiesBetweenEndpoints(pt)) segmentsToRemove.add(s);
 			}
 		}
 		allMinimalSegs.removeAll(segmentsToRemove);
@@ -158,9 +151,10 @@ public class Preprocessor
 	 * (Recursive construction of segments.)
 	 */	
 	public Set<Segment> constructAllNonMinimalSegments(Set<Segment> minSegs){
-		Set<Segment> segSet= new LinkedHashSet<>();
+		Set<Segment> segSet = new LinkedHashSet<>();
 		return constructAllNonMinimalSegments(minSegs, minSegs, segSet);
 	}
+	
 	private Set<Segment> constructAllNonMinimalSegments(Set<Segment> minList, Set<Segment> workList, Set<Segment> additionalSegs){
 		
 		if(workList.isEmpty()) {
