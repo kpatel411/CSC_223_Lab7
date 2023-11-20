@@ -294,32 +294,41 @@ public class Preprocessor
 		Point _B=new Point("*_B", 2.04,3.99);
 		Point B=new Point("B", 2.04, 5.5);
 		Point F=new Point("F", 2.04, 2.08);
-		if (seg.equals(minimal)) {
-			if (seg.equals(new Segment(B,_B)) && minimal.equals(new Segment(_B,_C))) System.out.println(0);
-			return null;
+		
+		if (seg.isCollinearWith(minimal) && seg.coincideWithoutOverlap(minimal)) {
+			//stitch the two together
+			if (seg.sharedVertex(minimal) != null) {
+				//if (MathUtilities.doubleEquals(seg.getPoint1().getY(), seg.getPoint2().getY())){
+				return new Segment(seg.getPoint1(), seg.getPoint2());
+				//}
+			}
 		}
-		if (!MathUtilities.doubleEquals(seg.slope(), minimal.slope())) {
-			if (seg.equals(new Segment(B,_B)) && minimal.equals(new Segment(_B,_C))) System.out.println(minimal.slope());
-			return null;
-		}
-		if(seg.getPoint1().equals(minimal.getPoint1())) {
-			if (seg.equals(new Segment(B,_B)) && minimal.equals(new Segment(_B,_C)))  System.out.println(2);
-			return new Segment(seg.getPoint2(), minimal.getPoint2());
-		}
-		else if (seg.getPoint1().equals(minimal.getPoint2())){
-			if (seg.equals(new Segment(B,_B)) && minimal.equals(new Segment(_B,_C))) System.out.println(3);
-			return new Segment(seg.getPoint2(), minimal.getPoint1());
-		}
-		else if (seg.getPoint2().equals(minimal.getPoint1())){
-
-			
-			if (seg.equals(new Segment(B,_B)) && minimal.equals(new Segment(_B,_C))) System.out.println(4);
-			return new Segment(seg.getPoint1(), minimal.getPoint2());
-		}
-		else if (seg.getPoint2().equals(minimal.getPoint2())) {
-//			System.out.println(5);
-			return new Segment(seg.getPoint1(), minimal.getPoint1());
-		}
+		
+//		if (seg.equals(minimal)) {
+//			if (seg.equals(new Segment(B,_B)) && minimal.equals(new Segment(_B,_C))) System.out.println(0);
+//			return null;
+//		}
+//		if (!MathUtilities.doubleEquals(seg.slope(), minimal.slope())) {
+//			if (seg.equals(new Segment(B,_B)) && minimal.equals(new Segment(_B,_C))) System.out.println(minimal.slope());
+//			return null;
+//		}
+//		if(seg.getPoint1().equals(minimal.getPoint1())) {
+//			if (seg.equals(new Segment(B,_B)) && minimal.equals(new Segment(_B,_C)))  System.out.println(2);
+//			return new Segment(seg.getPoint2(), minimal.getPoint2());
+//		}
+//		else if (seg.getPoint1().equals(minimal.getPoint2())){
+//			if (seg.equals(new Segment(B,_B)) && minimal.equals(new Segment(_B,_C))) System.out.println(3);
+//			return new Segment(seg.getPoint2(), minimal.getPoint1());
+//		}
+//		else if (seg.getPoint2().equals(minimal.getPoint1())){
+//			
+//			if (seg.equals(new Segment(B,_B)) && minimal.equals(new Segment(_B,_C))) System.out.println(4);
+//			return new Segment(seg.getPoint1(), minimal.getPoint2());
+//		}
+//		else if (seg.getPoint2().equals(minimal.getPoint2())) {
+//			//System.out.println(5);
+//			return new Segment(seg.getPoint1(), minimal.getPoint1());
+//		}
 		return null;		
 	}
 }
