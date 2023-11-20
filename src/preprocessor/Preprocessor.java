@@ -298,11 +298,13 @@ public class Preprocessor
 		if (seg.isCollinearWith(minimal) && seg.coincideWithoutOverlap(minimal)) {
 			//stitch the two together
 			if (seg.sharedVertex(minimal) != null) {
-				//if (MathUtilities.doubleEquals(seg.getPoint1().getY(), seg.getPoint2().getY())){
-				// assuming they are ordered 
-				if (Point.LexicographicOrdering(seg.getPoint1(), seg.getPoint2()) {
-				return new Segment(seg.getPoint1(), seg.getPoint2());
-				}
+				// assuming they are ordered find the sub-segments and build a complete version
+					if (seg.HasSubSegment(minimal) && !seg.equals(minimal))
+						//combine(seg, minimal);
+						return new Segment(seg.getPoint1(), seg.getPoint2());
+					//until you run out
+					//if (_givenSegments.isEmpty()) return null;
+				
 			}
 		}
 		
