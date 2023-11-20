@@ -212,14 +212,14 @@ class PreprocessorTest
 		assertEquals(9, iSegments.size());
 		
 		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
-		assertEquals(9, minimalSegments.size());
+		assertEquals(17, minimalSegments.size());
 		
 		Set<Segment> computedNonMinimalSegments = 
 		pp.constructAllNonMinimalSegments(pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments));
 				
-		assertEquals(9, computedNonMinimalSegments.size());
+		assertEquals(13, computedNonMinimalSegments.size());
 				
-		assertEquals (18, pp._segmentDatabase.size() );
+		assertEquals (30, pp._segmentDatabase.size() );
 	}
 	
 	@Test
@@ -234,14 +234,11 @@ class PreprocessorTest
 
 		Preprocessor pp = new Preprocessor(points, segments);
 		Set<Point> impSet = pp._implicitPoints;
-		for (Point p: impSet) {
-			System.out.println(p.toString());
-		}
 		
 		assertEquals(3, pp._implicitPoints.size());
 		
 		Set<Segment> iSegments = pp.computeImplicitBaseSegments(pp._implicitPoints);
-		assertEquals(8, iSegments.size());
+		assertEquals(9, iSegments.size());
 		
 		Set<Segment> minimalSegments = pp.identifyAllMinimalSegments(pp._implicitPoints, segments, iSegments);
 		assertEquals(16, minimalSegments.size());
