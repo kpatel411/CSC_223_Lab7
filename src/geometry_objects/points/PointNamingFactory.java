@@ -208,4 +208,8 @@ public class PointNamingFactory
         }
         return output;
 	}
+	
+	public Set<Point> toSet() {
+		return _database.keySet();
+	}
 }

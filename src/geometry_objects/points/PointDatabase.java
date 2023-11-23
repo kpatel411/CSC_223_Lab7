@@ -89,4 +89,8 @@ public class PointDatabase
 	public Point getPoint(double x, double y) {
         return getPoint(new Point(x, y));
 	}
+	
+	public Set<Point> toSet() {
+		return _factory.toSet();
+	}
 }
